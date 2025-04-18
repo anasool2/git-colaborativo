@@ -4,6 +4,31 @@
     <title>Mi Perfil</title>
   </head>
   <body>
-    <h1>Bienvenido a la práctica</h1>
+    <form id="formPerfil">
+        <label>Nombre de usuario:</label>
+        <input type="text" name="usuario" placeholder="Nombre completo">
+        <br>
+        <label>Contraseña:</label>
+        <input type="password" name="clave" placeholder="Ingresá tu clave">
+        <br>
+        <button type="submit">Enviar</button>
+      </form>
+      
+      <script>
+        document.getElementById('formPerfil').addEventListener('submit', function(e) {
+          e.preventDefault();
+          const datos = {
+            usuario: e.target.usuario.value,
+            clave: e.target.clave.value
+          };
+          fetch('perfil.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(datos)
+          }).then(res => res.text())
+            .then(respuesta => alert(respuesta));
+        });
+      </script>
+      
   </body>
 </html>
